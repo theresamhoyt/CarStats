@@ -13,6 +13,7 @@
 		F6787E571CD3A82000F3E275 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6787E551CD3A82000F3E275 /* Main.storyboard */; };
 		F6787E591CD3A82000F3E275 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F6787E581CD3A82000F3E275 /* Assets.xcassets */; };
 		F6787E5C1CD3A82000F3E275 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6787E5A1CD3A82000F3E275 /* LaunchScreen.storyboard */; };
+		F6787E661CD3A94800F3E275 /* CarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6787E651CD3A94800F3E275 /* CarModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		F6787E581CD3A82000F3E275 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F6787E5B1CD3A82000F3E275 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F6787E5D1CD3A82000F3E275 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F6787E651CD3A94800F3E275 /* CarModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		F6787E4E1CD3A82000F3E275 /* CarStats */ = {
 			isa = PBXGroup;
 			children = (
+				F6787E651CD3A94800F3E275 /* CarModel.swift */,
 				F6787E4F1CD3A82000F3E275 /* AppDelegate.swift */,
 				F6787E511CD3A82000F3E275 /* MasterViewController.swift */,
 				F6787E531CD3A82000F3E275 /* DetailViewController.swift */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6787E661CD3A94800F3E275 /* CarModel.swift in Sources */,
 				F6787E541CD3A82000F3E275 /* DetailViewController.swift in Sources */,
 				F6787E521CD3A82000F3E275 /* MasterViewController.swift in Sources */,
 				F6787E501CD3A82000F3E275 /* AppDelegate.swift in Sources */,
