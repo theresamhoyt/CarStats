@@ -11,6 +11,7 @@
 		3D07C2BF1CDA86A800EB605B /* InspectionMain.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 3D07C2BB1CDA86A800EB605B /* InspectionMain.jpeg */; };
 		3D07C2C01CDA86A800EB605B /* OilMaine.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D07C2BC1CDA86A800EB605B /* OilMaine.png */; };
 		3D07C2C11CDA86A800EB605B /* TireMain.png in Resources */ = {isa = PBXBuildFile; fileRef = 3D07C2BD1CDA86A800EB605B /* TireMain.png */; };
+		3DECA10F1CDAA1240028AF54 /* problem-icon.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3DECA10E1CDAA1240028AF54 /* problem-icon.gif */; };
 		F6787E501CD3A82000F3E275 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6787E4F1CD3A82000F3E275 /* AppDelegate.swift */; };
 		F6787E521CD3A82000F3E275 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6787E511CD3A82000F3E275 /* MasterViewController.swift */; };
 		F6787E541CD3A82000F3E275 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6787E531CD3A82000F3E275 /* DetailViewController.swift */; };
@@ -25,6 +26,7 @@
 		3D07C2BB1CDA86A800EB605B /* InspectionMain.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = InspectionMain.jpeg; sourceTree = "<group>"; };
 		3D07C2BC1CDA86A800EB605B /* OilMaine.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OilMaine.png; sourceTree = "<group>"; };
 		3D07C2BD1CDA86A800EB605B /* TireMain.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TireMain.png; sourceTree = "<group>"; };
+		3DECA10E1CDAA1240028AF54 /* problem-icon.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "problem-icon.gif"; sourceTree = "<group>"; };
 		F6787E4C1CD3A82000F3E275 /* CarStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6787E4F1CD3A82000F3E275 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6787E511CD3A82000F3E275 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -52,6 +54,7 @@
 			children = (
 				3D07C2BB1CDA86A800EB605B /* InspectionMain.jpeg */,
 				3D07C2BC1CDA86A800EB605B /* OilMaine.png */,
+				3DECA10E1CDAA1240028AF54 /* problem-icon.gif */,
 				3D07C2BD1CDA86A800EB605B /* TireMain.png */,
 				F6787E4E1CD3A82000F3E275 /* CarStats */,
 				F6787E4D1CD3A82000F3E275 /* Products */,
@@ -143,6 +146,7 @@
 				3D07C2C11CDA86A800EB605B /* TireMain.png in Resources */,
 				3D07C2BE1CDA86A800EB605B /* GasMain.jpeg in Resources */,
 				3D07C2C01CDA86A800EB605B /* OilMaine.png in Resources */,
+				3DECA10F1CDAA1240028AF54 /* problem-icon.gif in Resources */,
 				F6787E5C1CD3A82000F3E275 /* LaunchScreen.storyboard in Resources */,
 				F6787E591CD3A82000F3E275 /* Assets.xcassets in Resources */,
 				3D07C2BF1CDA86A800EB605B /* InspectionMain.jpeg in Resources */,
