@@ -10,16 +10,24 @@ import UIKit
 
 class MasterViewController: UITableViewController {
 
+    let picture1 = NSURL(fileURLWithPath:(NSBundle.mainBundle().pathForResource("GasMain", ofType: "jpeg"))!)
+    
+     let picture2 = NSURL(fileURLWithPath:(NSBundle.mainBundle().pathForResource("InspectionMain", ofType: "jpeg"))!)
+    
+    let picture3 = NSURL(fileURLWithPath:(NSBundle.mainBundle().pathForResource("TireMain", ofType: "png"))!)
+    
+    let picture4 = NSURL(fileURLWithPath:(NSBundle.mainBundle().pathForResource("OilMaine", ofType: "png"))!)
+    
+    
+    
     var detailViewController: DetailViewController? = nil
-    var categoryObjects = CarStats()
+    var CellObjects: [[String]] = [[]]
     var counter = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-            CarModel.sharedInstance.loadCarStat()
-          self.categoryObjects.carStatStringArray = CarModel.sharedInstance.getCarStat()
-            self.tableView.reloadData()
+        CellObjects = CarModel.sharedInstance.LoadArray()
+        self.tableView.reloadData()
       
         //self.navigationItem.leftBarButtonItem = self.editButtonItem()
 
@@ -54,34 +62,79 @@ class MasterViewController: UITableViewController {
     // MARK: - Segues
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showDetail" {
-            if let indexPath = self.tableView.indexPathForSelectedRow {
-              //  let object = categoryObjects[indexPath.row] as!
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
-              //  controller.detailItem = object
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-                controller.navigationItem.leftItemsSupplementBackButton = true
-                let statInCell = categoryObjects.carStatStringArray[indexPath.section]
-           //     controller.setStat = statInCell
+       
+     let indexPath = self.tableView.indexPathForSelectedRow
+        var Location = CellObjects[(indexPath?.section)!]
+
+        if let controller = (segue.destinationViewController as? UINavigationController)!.topViewController as? DetailViewController{
+            controller.title = Location[0]
+            
+            if let indetify = segue.identifier{
+                
+                switch indetify{
+                case "NextTable":
+                    Location.removeFirst()
+                    controller.CarStat = Location
+                    
+                default: break
+                }
+                
             }
         }
     }
+//        if segue.identifier == "showDetail" {
+//            if let indexPath = self.tableView.indexPathForSelectedRow {
+//              //  let object = categoryObjects[indexPath.row] as!
+//                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
+//              //  controller.detailItem = object
+//                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+//                controller.navigationItem.leftItemsSupplementBackButton = true
+//              //  let statInCell = categoryObjects.carStatStringArray[indexPath.section]
+//           //     controller.setStat = statInCell
+//            }
+//        }
+ //   }
     
     // MARK: - Table View
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return CellObjects.count
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categoryObjects.carStatStringArray.count
+        return 1
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+    let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
-        let stat = CarModel.sharedInstance.getCarStat()
-        cell.textLabel!.text = stat[indexPath.section]
+        let stat = CellObjects[indexPath.section]
+        let title  = stat[0]
+        cell.textLabel!.text = stat[0]
+        let size = CGSizeMake(100, 100)
+        if title == "Gas"{
+             let size = CGSizeMake(120, 120)
+            cell.imageView?.image = imageResize(UIImage(named: "GasMain.jpeg")!, sizeChange: size)
+        
+        }else if title == "Oil"{
+            print("We're in ")
+   
+            cell.imageView?.image = imageResize(UIImage(named: "OilMaine.png")!, sizeChange: size)
+            
+        }else if title == "Tires"{
+            print("We're in ")
+            cell.imageView?.image?.scale
+            cell.imageView?.image = imageResize(UIImage(named: "TireMain.png")!, sizeChange: size)
+
+            
+        }else if title == "Inspection"{
+            print("We're in ")
+            cell.imageView?.image?.scale
+            cell.imageView?.image = imageResize(UIImage(named: "InspectionMain.jpeg")!, sizeChange: size)
+
+            
+        }
+
         return cell
     }
 
@@ -89,7 +142,20 @@ class MasterViewController: UITableViewController {
         // Return false if you do not want the specified item to be editable.
         return true
     }
- /*
+
+
+    func imageResize(image: UIImage, sizeChange:CGSize) -> UIImage {
+        
+        let hasAlpha = true
+        let scale: CGFloat = 0.0
+        UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha,scale)
+        image.drawInRect(CGRect(origin: CGPointZero, size: sizeChange))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        return scaledImage
+        
+    }
+/*
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             objects.removeAtIndex(indexPath.row)
@@ -99,6 +165,7 @@ class MasterViewController: UITableViewController {
         }
     }
 */
+
 
 }
 

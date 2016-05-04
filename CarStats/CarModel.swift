@@ -15,30 +15,32 @@ var tireArray = ["Tires", "Mileage of Tires","Price", "Tire Rotation Mileage",""
 var inspectionArray = ["Inspection", "Mileage","Date of Inspection","Cost of Inspection",""]
 
 
-class CarStats: NSObject{
-    
-    var carStatStringArray: [String] = []
-    
-    func getTitle() -> String{
-        return carStatStringArray[0]
-    }
-    func getOne() -> String{
-        return carStatStringArray[1]
-    }
-    func getTwo() -> String{
-        return carStatStringArray[2]
-    }
-    func getThree() -> String{
-        return carStatStringArray[3]
-    }
-    func getFour() -> String{
-        return carStatStringArray[4]
-    }
-}
-
+//class CarStats: NSObject{
+//    
+//    var carStatStringArray: [String] = []
+//    
+//    func getTitle() -> String{
+//        return carStatStringArray[0]
+//    }
+//    func getOne() -> String{
+//        return carStatStringArray[1]
+//    }
+//    func getTwo() -> String{
+//        return carStatStringArray[2]
+//    }
+//    func getThree() -> String{
+//        return carStatStringArray[3]
+//    }
+//    func getFour() -> String{
+//        return carStatStringArray[4]
+//    }
+//}
+//
 class CarModel{
-    var stringArray = CarStats()
+   
     
+    var CarStatsArray: [[String]] = [[]]
+   
     class var sharedInstance: CarModel {
         struct Singleton {
             static let instance = CarModel()
@@ -46,31 +48,39 @@ class CarModel{
         
         return Singleton.instance
     }
+    
+    func LoadArray() -> [[String]]{
+        
+      let tempArray: [[String]] = [gasArray,oilArray,tireArray,inspectionArray]
+    
+    return tempArray
+   
+    }
  
-    func loadCarStat() {
-       stringArray.carStatStringArray = carStatArray
-    }
-    
-    func loadGas() {
-        stringArray.carStatStringArray = gasArray
-    }
-    
-    func loadOil() {
-        stringArray.carStatStringArray = oilArray
-    }
-    
-    func loadTire() {
-        stringArray.carStatStringArray = tireArray
-    }
-    
-    func loadInspection() {
-        stringArray.carStatStringArray = inspectionArray
-    }
-    
-    func getCarStat() -> [String] {
-
-        return stringArray.carStatStringArray
-    }
+//    func loadCarStat() {
+//       CarStatsArray.carStatStringArray = carStatArray
+//    }
+//    
+//    func loadGas() {
+//         CarStatsArray.carStatStringArray = gasArray
+//    }
+//    
+//    func loadOil() {
+//        CarStatsArray.carStatStringArray = oilArray
+//    }
+//    
+//    func loadTire() {
+//         CarStatsArray.carStatStringArray = tireArray
+//    }
+//    
+//    func loadInspection() {
+//        stringArray.carStatStringArray = inspectionArray
+//    }
+//    
+//    func getCarStat() -> [String] {
+//
+//        return stringArray.carStatStringArray
+//    }
     
 }
 

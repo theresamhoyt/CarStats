@@ -8,11 +8,13 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UITableViewController {
 
     @IBOutlet weak var detailDescriptionLabel: UILabel!
 
-
+    var CarStat: [String] = []
+    
+    
     var detailItem: AnyObject? {
         didSet {
             // Update the view.
@@ -33,13 +35,25 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+   
     }
     
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return CarStat.count
+    }
+    
+   override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let Cell1 = tableView.dequeueReusableCellWithIdentifier("Cell1", forIndexPath: indexPath)
+        
+            Cell1.textLabel?.text = CarStat[indexPath.section]
+        
+        return Cell1
+    }
 
 }
 
