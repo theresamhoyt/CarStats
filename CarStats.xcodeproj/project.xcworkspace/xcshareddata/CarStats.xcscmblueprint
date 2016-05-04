@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "58EDE0EDBCBF3FF037F74404A41AAB11E574DFF6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "0650B7AD5B8DA57B188E89ADBBE617D3A1159290" : 0,
+    "58EDE0EDBCBF3FF037F74404A41AAB11E574DFF6" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "196EBC59-BCF5-4A40-9B96-C8286E311C81",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "0650B7AD5B8DA57B188E89ADBBE617D3A1159290" : "",
+    "58EDE0EDBCBF3FF037F74404A41AAB11E574DFF6" : "CarStats\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "CarStats",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "CarStats.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/theresamhoyt\/CarServices.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0650B7AD5B8DA57B188E89ADBBE617D3A1159290"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/theresamhoyt\/CarStats.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "58EDE0EDBCBF3FF037F74404A41AAB11E574DFF6"
+    }
+  ]
+}
