@@ -59,7 +59,18 @@ class DetailViewController: UITableViewController {
         
     }
     
-    
+    class customView: UIView {
+        let viewLabel: UILabel?
+        override init(frame: CGRect) {
+            super.init(frame:frame)
+            
+            viewLabel = UILabel(frame: CGRect(x: 20, y:20, width: 100, height: 250))
+            addSubview(viewLabel!)
+        }
+        required init?(coder aDecoder: NSCoder){
+            super.init(coder: aDecoder)
+        }
+    }
     
 //    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
     func createPopup() -> UIAlertController {
