@@ -10,14 +10,15 @@ import UIKit
 
 class MasterViewController: UITableViewController {
 
-    let picture1 = NSURL(fileURLWithPath:(NSBundle.mainBundle().pathForResource("GasMain", ofType: "jpeg"))!)
+//    let picture1 = NSURL(fileURLWithPath:(NSBundle.mainBundle().pathForResource("GasMain", ofType: "jpeg"))!)
+//    let picture2 = NSURL(fileURLWithPath:(NSBundle.mainBundle().pathForResource("InspectionMain", ofType: "jpeg"))!)
+//    let picture3 = NSURL(fileURLWithPath:(NSBundle.mainBundle().pathForResource("TireMain", ofType: "png"))!)
+//    let picture4 = NSURL(fileURLWithPath:(NSBundle.mainBundle().pathForResource("OilMaine", ofType: "png"))!)
     
-     let picture2 = NSURL(fileURLWithPath:(NSBundle.mainBundle().pathForResource("InspectionMain", ofType: "jpeg"))!)
-    
-    let picture3 = NSURL(fileURLWithPath:(NSBundle.mainBundle().pathForResource("TireMain", ofType: "png"))!)
-    
-    let picture4 = NSURL(fileURLWithPath:(NSBundle.mainBundle().pathForResource("OilMaine", ofType: "png"))!)
-    
+    let gasColor = UIColor(red: 28/255, green: 173/255, blue: 0/255, alpha: 1.0)
+    let oilColor = UIColor(red: 239/255, green: 183/255, blue: 0/255, alpha: 1.0)
+    let tireColor = UIColor(red: 255/255, green: 0/255, blue: 4/255, alpha: 1.0)
+    let inspectionColor = UIColor(red: 252/255, green: 247/255, blue: 143/255, alpha: 1.0)
     
     
     var detailViewController: DetailViewController? = nil
@@ -68,6 +69,9 @@ class MasterViewController: UITableViewController {
 
         if let controller = (segue.destinationViewController as? UINavigationController)!.topViewController as? DetailViewController{
             controller.title = Location[0]
+//            if indexPath?.section == 0{
+//                controller.cellForRowAtIndexPath(indexPath?.section).
+//            }
             
             if let indetify = segue.identifier{
                 
@@ -106,31 +110,38 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
         let stat = CellObjects[indexPath.section]
         let title  = stat[0]
+        cell.textLabel!.font = UIFont(name: "Copperplate-Bold", size: 30)
         cell.textLabel!.text = stat[0]
         let size = CGSizeMake(100, 100)
         if title == "Gas"{
-             let size = CGSizeMake(120, 120)
-            cell.imageView?.image = imageResize(UIImage(named: "GasMain.jpeg")!, sizeChange: size)
+//             let size = CGSizeMake(120, 120)
+            print("in gas")
+            cell.imageView?.image = imageResize(UIImage(named: "gasMain.png")!, sizeChange: size)
+            cell.backgroundColor = gasColor
         
         }else if title == "Oil"{
-            print("We're in ")
-   
-            cell.imageView?.image = imageResize(UIImage(named: "OilMaine.png")!, sizeChange: size)
+            print("in oil")
+            cell.imageView?.image = imageResize(UIImage(named: "oilMain.png")!, sizeChange: size)
+            cell.backgroundColor = oilColor
             
         }else if title == "Tires"{
-            print("We're in ")
+            print("in tires")
             cell.imageView?.image?.scale
-            cell.imageView?.image = imageResize(UIImage(named: "TireMain.png")!, sizeChange: size)
+            cell.imageView?.image = imageResize(UIImage(named: "tireMain.png")!, sizeChange: size)
+            cell.backgroundColor = tireColor
 
             
         }else if title == "Inspection"{
-            print("We're in ")
+            print("in inspection")
             cell.imageView?.image?.scale
-            cell.imageView?.image = imageResize(UIImage(named: "InspectionMain.jpeg")!, sizeChange: size)
+            cell.imageView?.image = imageResize(UIImage(named: "inspectionMain.jpeg")!, sizeChange: size)
+            cell.backgroundColor = inspectionColor
+            print("out inspection")
 
             
         }
