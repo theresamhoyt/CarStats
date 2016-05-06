@@ -21,8 +21,6 @@ class DetailViewController: UITableViewController {
                 ]
     
     var CarStat: [String] = []
-    
-    
     var detailItem: AnyObject? {
         didSet {
             // Update the view.
@@ -74,7 +72,7 @@ class DetailViewController: UITableViewController {
     
 //    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
     func createPopup() -> UIAlertController {
-        let popup = UIAlertController(title: "popupTitle", message: "Insert mileage", preferredStyle: UIAlertControllerStyle.Alert)
+        let popup = UIAlertController(title: "", message: "Insert Data", preferredStyle: UIAlertControllerStyle.Alert)
         
         popup.addTextFieldWithConfigurationHandler{(textField: UITextField!) in textField.keyboardType = UIKeyboardType.NumberPad}
         
@@ -92,26 +90,32 @@ class DetailViewController: UITableViewController {
     }
     
    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let Cell1 = tableView.dequeueReusableCellWithIdentifier("Cell1", forIndexPath: indexPath)
-        Cell1.textLabel!.font = UIFont(name: "Copperplate-Bold", size: 30)
+    
+    let Cell1 = tableView.dequeueReusableCellWithIdentifier("Cell1", forIndexPath: indexPath) as? customDetailCell
+        Cell1!.textLabel!.font = UIFont(name: "Copperplate-Bold", size: 30)
     
         switch(self.title){
         case "Gas"?:
-            Cell1.backgroundColor = color[0]
+            Cell1!.backgroundColor = color[0]
         case "Oil"?:
-            Cell1.backgroundColor = color[1]
+            Cell1!.backgroundColor = color[1]
         case "Tires"?:
-            Cell1.backgroundColor = color[2]
+            Cell1!.backgroundColor = color[2]
         case "Inspection"?:
-            Cell1.backgroundColor = color[3]
+            Cell1!.backgroundColor = color[3]
         default:
             print("default")
         break
         }
+        Cell1!.customTitle?.text = CarStat[indexPath.section]
+
+
+      //  Cell1!.customButton?.currentTitle = CarStat[indexPath.section]
+        return Cell1!
+    }
     
-        Cell1.textLabel?.text = CarStat[indexPath.section]
-        
-        return Cell1
+    @IBAction func textPopUpView(sender: AnyObject) {
+        createPopup()
     }
 
 }
