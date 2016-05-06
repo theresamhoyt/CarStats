@@ -21,6 +21,13 @@ class MasterViewController: UITableViewController {
     let inspectionColor = UIColor(red: 252/255, green: 247/255, blue: 143/255, alpha: 1.0)
     
     
+    let color = [UIColor(red: 28/255, green: 173/255, blue: 0/255, alpha: 1.0),
+                 UIColor(red: 239/255, green: 183/255, blue: 0/255, alpha: 1.0),
+                 UIColor(red: 255/255, green: 0/255, blue: 4/255, alpha: 1.0),
+                 UIColor(red: 252/255, green: 247/255, blue: 143/255, alpha: 1.0)
+    ]
+    
+    
     var alertTitle: String?
     var detailViewController: DetailViewController? = nil
     var CellObjects: [[String]] = [[]]
@@ -149,10 +156,12 @@ class MasterViewController: UITableViewController {
         cell.textLabel!.text = stat[0]
         let size = CGSizeMake(100, 100)
         if title == "Gas"{
-            alertTitle = "Gas Alert"
-            cell.accessoryType = .DetailButton
-             let size = CGSizeMake(120, 120)
-            cell.imageView?.image = imageResize(UIImage(named: "GasMain.jpeg")!, sizeChange: size)
+                cell.accessoryType = .DetailButton
+                alertTitle = "Gas Alert"
+//             let size = CGSizeMake(120, 120)
+            print("in gas")
+            cell.imageView?.image = imageResize(UIImage(named: "gasMain.png")!, sizeChange: size)
+            cell.backgroundColor = gasColor
         
         }else if title == "Oil"{
             print("in oil")
