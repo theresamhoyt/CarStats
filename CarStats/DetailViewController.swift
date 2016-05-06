@@ -10,6 +10,8 @@ import UIKit
 
 class DetailViewController: UITableViewController {
 
+    
+    
     @IBOutlet weak var detailDescriptionLabel: UILabel!
     
     let color = [UIColor(red: 28/255, green: 173/255, blue: 0/255, alpha: 1.0),
@@ -41,12 +43,14 @@ class DetailViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
-   
+        print(CarStat.count)
     }
     
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
         return CarStat.count
+        
     }
     
    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,12 +60,10 @@ class DetailViewController: UITableViewController {
    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let Cell1 = tableView.dequeueReusableCellWithIdentifier("Cell1", forIndexPath: indexPath)
     
-   
-   
-  
     switch(self.title){
     case "Gas"?:
         Cell1.backgroundColor = color[0]
+        
     case "Oil"?:
         Cell1.backgroundColor = color[1]
     case "Tires"?:

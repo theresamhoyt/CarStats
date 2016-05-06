@@ -21,6 +21,12 @@ class MasterViewController: UITableViewController {
     let inspectionColor = UIColor(red: 252/255, green: 247/255, blue: 143/255, alpha: 1.0)
     
     
+    let color = [UIColor(red: 28/255, green: 173/255, blue: 0/255, alpha: 1.0),
+                 UIColor(red: 239/255, green: 183/255, blue: 0/255, alpha: 1.0),
+                 UIColor(red: 255/255, green: 0/255, blue: 4/255, alpha: 1.0),
+                 UIColor(red: 252/255, green: 247/255, blue: 143/255, alpha: 1.0)
+    ]
+    
     var detailViewController: DetailViewController? = nil
     var CellObjects: [[String]] = [[]]
     var counter = 0
@@ -69,15 +75,25 @@ class MasterViewController: UITableViewController {
 
         if let controller = (segue.destinationViewController as? UINavigationController)!.topViewController as? DetailViewController{
             controller.title = Location[0]
-//            if indexPath?.section == 0{
-//                controller.cellForRowAtIndexPath(indexPath?.section).
+//            switch indexPath?.section {
+//            case 0?:
+//                controller.self.tableView.backgroundColor = color[0]
+//            case 1?:
+//                controller.self.tableView.backgroundColor = color[1]
+//            case 2?:
+//                controller.self.tableView.backgroundColor = color[2]
+//            case 3?:
+//                controller.self.tableView.backgroundColor = color[3]
+//            default: break
 //            }
+            
             
             if let indetify = segue.identifier{
                 
                 switch indetify{
                 case "NextTable":
                     Location.removeFirst()
+                    print(Location.description)
                     controller.CarStat = Location
                     
                 default: break
