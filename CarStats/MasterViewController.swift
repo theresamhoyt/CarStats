@@ -19,7 +19,7 @@ class MasterViewController: UITableViewController {
     let picture4 = NSURL(fileURLWithPath:(NSBundle.mainBundle().pathForResource("OilMaine", ofType: "png"))!)
     
     
-    
+    var alertTitle: String?
     var detailViewController: DetailViewController? = nil
     var CellObjects: [[String]] = [[]]
     var counter = 0
@@ -65,7 +65,7 @@ class MasterViewController: UITableViewController {
        
      let indexPath = self.tableView.indexPathForSelectedRow
         var Location = CellObjects[(indexPath?.section)!]
-
+     
         if let controller = (segue.destinationViewController as? UINavigationController)!.topViewController as? DetailViewController{
             controller.title = Location[0]
             
@@ -96,6 +96,25 @@ class MasterViewController: UITableViewController {
  //   }
     
     // MARK: - Table View
+    func okHandler(actionTarget: UIAlertAction){
+        print("YES");//operator ! because it's Optional here
+        
+        //Remove data from NSUserDefaults.
+        
+    }
+    
+    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+        
+        let alert = UIAlertController(title: alertTitle, message: "Some message from NSUserDefaults", preferredStyle: UIAlertControllerStyle.Alert);
+        
+        // Acknowledged the message, remove the data from NSUserDefaults.
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: okHandler));
+        
+        //Saw the message, but want to keep the information. Do not remove from NSUserDefaults.
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil));
+        presentViewController(alert, animated: true, completion: nil);
+    }
+    
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return CellObjects.count
@@ -113,6 +132,8 @@ class MasterViewController: UITableViewController {
         cell.textLabel!.text = stat[0]
         let size = CGSizeMake(100, 100)
         if title == "Gas"{
+            alertTitle = "Gas Alert"
+            cell.accessoryType = .DetailButton
              let size = CGSizeMake(120, 120)
             cell.imageView?.image = imageResize(UIImage(named: "GasMain.jpeg")!, sizeChange: size)
         
