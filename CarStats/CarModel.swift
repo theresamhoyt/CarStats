@@ -9,10 +9,10 @@
 import Foundation
 
 var carStatArray = ["CarStats", "Gas","Oil","Tires","Inspection"]
-var gasArray = ["Gas","Mielage","Price","Gallons"]
-var oilArray = ["Oil", "Mileage", "Price"]
-var tireArray = ["Tires", "Mileage of Tires","Price", "Tire Rotation Mileage"]
-var inspectionArray = ["Inspection", "Mileage","Date of Inspection","Cost of Inspection"]
+var gasArray = ["Gas","Insert Mileage","Insert Price","Insert Gallons"]
+var oilArray = ["Oil", "Insert Mileage", "Insert Price"]
+var tireArray = ["Tires", "Insert Mileage @ New Tires","Insert New Tires Price", "Insert Mileage @ Tire Rotation "]
+var inspectionArray = ["Inspection", "Insert Mileage","Date of Inspection","Insert Total Cost"]
 
 
 //class CarStats: NSObject{

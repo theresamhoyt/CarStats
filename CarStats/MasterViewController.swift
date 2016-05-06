@@ -10,17 +10,6 @@ import UIKit
 
 class MasterViewController: UITableViewController {
 
-//    let picture1 = NSURL(fileURLWithPath:(NSBundle.mainBundle().pathForResource("GasMain", ofType: "jpeg"))!)
-//    let picture2 = NSURL(fileURLWithPath:(NSBundle.mainBundle().pathForResource("InspectionMain", ofType: "jpeg"))!)
-//    let picture3 = NSURL(fileURLWithPath:(NSBundle.mainBundle().pathForResource("TireMain", ofType: "png"))!)
-//    let picture4 = NSURL(fileURLWithPath:(NSBundle.mainBundle().pathForResource("OilMaine", ofType: "png"))!)
-    
-    let gasColor = UIColor(red: 28/255, green: 173/255, blue: 0/255, alpha: 1.0)
-    let oilColor = UIColor(red: 239/255, green: 183/255, blue: 0/255, alpha: 1.0)
-    let tireColor = UIColor(red: 255/255, green: 0/255, blue: 4/255, alpha: 1.0)
-    let inspectionColor = UIColor(red: 252/255, green: 247/255, blue: 143/255, alpha: 1.0)
-    
-    
     let color = [UIColor(red: 28/255, green: 173/255, blue: 0/255, alpha: 1.0),
                  UIColor(red: 239/255, green: 183/255, blue: 0/255, alpha: 1.0),
                  UIColor(red: 255/255, green: 0/255, blue: 4/255, alpha: 1.0),
@@ -95,7 +84,6 @@ class MasterViewController: UITableViewController {
                 switch indetify{
                 case "NextTable":
                     Location.removeFirst()
-                    print(Location.description)
                     controller.CarStat = Location
                     
                 default: break
@@ -127,14 +115,14 @@ class MasterViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
         
-        let alert = UIAlertController(title: alertTitle, message: "Some message from NSUserDefaults", preferredStyle: UIAlertControllerStyle.Alert);
+        let alert = UIAlertController(title: alertTitle, message: "Some message from NSUserDefaults", preferredStyle: UIAlertControllerStyle.Alert)
         
         // Acknowledged the message, remove the data from NSUserDefaults.
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: okHandler));
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: okHandler))
         
         //Saw the message, but want to keep the information. Do not remove from NSUserDefaults.
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil));
-        presentViewController(alert, animated: true, completion: nil);
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil))
+        presentViewController(alert, animated: true, completion: nil)
     }
     
 
@@ -156,31 +144,26 @@ class MasterViewController: UITableViewController {
         cell.textLabel!.text = stat[0]
         let size = CGSizeMake(100, 100)
         if title == "Gas"{
-                cell.accessoryType = .DetailButton
-                alertTitle = "Gas Alert"
+            cell.accessoryType = .DetailButton
+            alertTitle = "Gas Alert"
 //             let size = CGSizeMake(120, 120)
-            print("in gas")
             cell.imageView?.image = imageResize(UIImage(named: "gasMain.png")!, sizeChange: size)
-            cell.backgroundColor = gasColor
+            cell.backgroundColor = color[0]//gasColor
         
         }else if title == "Oil"{
-            print("in oil")
             cell.imageView?.image = imageResize(UIImage(named: "oilMain.png")!, sizeChange: size)
-            cell.backgroundColor = oilColor
+            cell.backgroundColor = color[1]//oilColor
             
         }else if title == "Tires"{
-            print("in tires")
             cell.imageView?.image?.scale
             cell.imageView?.image = imageResize(UIImage(named: "tireMain.png")!, sizeChange: size)
-            cell.backgroundColor = tireColor
+            cell.backgroundColor = color[2]//tireColor
 
             
         }else if title == "Inspection"{
-            print("in inspection")
             cell.imageView?.image?.scale
             cell.imageView?.image = imageResize(UIImage(named: "inspectionMain.jpeg")!, sizeChange: size)
-            cell.backgroundColor = inspectionColor
-            print("out inspection")
+            cell.backgroundColor = color[3]//inspectionColor
 
             
         }
