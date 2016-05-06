@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F620CC7D1CDD377300A93C50 /* customDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F620CC7C1CDD377300A93C50 /* customDetailCell.swift */; };
 		F6787E501CD3A82000F3E275 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6787E4F1CD3A82000F3E275 /* AppDelegate.swift */; };
 		F6787E521CD3A82000F3E275 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6787E511CD3A82000F3E275 /* MasterViewController.swift */; };
 		F6787E541CD3A82000F3E275 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6787E531CD3A82000F3E275 /* DetailViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F620CC7C1CDD377300A93C50 /* customDetailCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customDetailCell.swift; sourceTree = "<group>"; };
 		F6787E4C1CD3A82000F3E275 /* CarStats.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarStats.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6787E4F1CD3A82000F3E275 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6787E511CD3A82000F3E275 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				F6787E531CD3A82000F3E275 /* DetailViewController.swift */,
 				F6787E551CD3A82000F3E275 /* Main.storyboard */,
 				F6787E581CD3A82000F3E275 /* Assets.xcassets */,
+				F620CC7C1CDD377300A93C50 /* customDetailCell.swift */,
 				F6787E5A1CD3A82000F3E275 /* LaunchScreen.storyboard */,
 				F6787E5D1CD3A82000F3E275 /* Info.plist */,
 			);
@@ -143,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F6787E661CD3A94800F3E275 /* CarModel.swift in Sources */,
+				F620CC7D1CDD377300A93C50 /* customDetailCell.swift in Sources */,
 				F6787E541CD3A82000F3E275 /* DetailViewController.swift in Sources */,
 				F6787E521CD3A82000F3E275 /* MasterViewController.swift in Sources */,
 				F6787E501CD3A82000F3E275 /* AppDelegate.swift in Sources */,
