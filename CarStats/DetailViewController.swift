@@ -10,8 +10,16 @@ import UIKit
 
 class DetailViewController: UITableViewController {
 
+    
+    
     @IBOutlet weak var detailDescriptionLabel: UILabel!
-
+    
+    let color = [UIColor(red: 28/255, green: 173/255, blue: 0/255, alpha: 1.0),
+                 UIColor(red: 239/255, green: 183/255, blue: 0/255, alpha: 1.0),
+                 UIColor(red: 255/255, green: 0/255, blue: 4/255, alpha: 1.0),
+                 UIColor(red: 252/255, green: 247/255, blue: 143/255, alpha: 1.0)
+                ]
+    
     var CarStat: [String] = []
     
     
@@ -35,12 +43,14 @@ class DetailViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
-   
+        print(CarStat.count)
     }
     
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        
         return CarStat.count
+        
     }
     
    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,7 +59,22 @@ class DetailViewController: UITableViewController {
     
    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let Cell1 = tableView.dequeueReusableCellWithIdentifier("Cell1", forIndexPath: indexPath)
+    
+    switch(self.title){
+    case "Gas"?:
+        Cell1.backgroundColor = color[0]
         
+    case "Oil"?:
+        Cell1.backgroundColor = color[1]
+    case "Tires"?:
+        Cell1.backgroundColor = color[2]
+    case "Inspection"?:
+        Cell1.backgroundColor = color[3]
+    default:
+        print("default")
+        break
+    }
+    
             Cell1.textLabel?.text = CarStat[indexPath.section]
         
         return Cell1
