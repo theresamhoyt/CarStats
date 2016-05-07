@@ -50,29 +50,8 @@ class DetailViewController: UITableViewController {
         
     }
     
-    func saveHandler(actionTarget: UIAlertAction){
-        print("YES");//operator ! because it's Optional here
-        
-        //Remove data from NSUserDefaults.
-        
-    }
-    
-    
-    
+
 //    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-    func createPopup() -> UIAlertController {
-        let popup = UIAlertController(title: "", message: "Insert Data", preferredStyle: UIAlertControllerStyle.Alert)
-        
-        popup.addTextFieldWithConfigurationHandler{(textField: UITextField!) in textField.keyboardType = UIKeyboardType.NumberPad}
-        
-        // Acknowledged the message, remove the data from NSUserDefaults.
-        popup.addAction(UIAlertAction(title: "Save", style: UIAlertActionStyle.Default, handler: saveHandler));
-        
-        //Saw the message, but want to keep the information. Do not remove from NSUserDefaults.
-        popup.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Default, handler: nil));
-        presentViewController(popup, animated: true, completion: nil);
-        return popup
-    }
     
    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -81,31 +60,38 @@ class DetailViewController: UITableViewController {
    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
     let Cell1 = tableView.dequeueReusableCellWithIdentifier("Cell1", forIndexPath: indexPath) as? customDetailCell
-        Cell1!.textLabel!.font = UIFont(name: "Copperplate-Bold", size: 30)
+        Cell1!.textLabel!.font = UIFont(name: "Copperplate-Bold", size: 15)
     
         switch(self.title){
         case "Gas"?:
             Cell1!.backgroundColor = color[0]
+             Cell1!.customView.backgroundColor = color[0]
         case "Oil"?:
             Cell1!.backgroundColor = color[1]
+             Cell1!.customView.backgroundColor = color[1]
         case "Tires"?:
             Cell1!.backgroundColor = color[2]
+             Cell1!.customView.backgroundColor = color[2]
         case "Inspection"?:
             Cell1!.backgroundColor = color[3]
+             Cell1!.customView.backgroundColor = color[3]
         default:
             print("default")
         break
         }
         Cell1!.customTitle?.text = CarStat[indexPath.section]
-
+    
 
       //  Cell1!.customButton?.currentTitle = CarStat[indexPath.section]
         return Cell1!
     }
     
-    @IBAction func textPopUpView(sender: AnyObject) {
-        createPopup()
+    @IBAction func SaveInput(sender: AnyObject) {
     }
-
+    @IBAction func CancelInput(sender: AnyObject) {
+    }
+  
 }
+
+
 
