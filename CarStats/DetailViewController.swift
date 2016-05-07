@@ -9,8 +9,9 @@
 import UIKit
 
 class DetailViewController: UITableViewController {
-
     
+    var text: String?
+    var titleAndLabel: String?
     
     @IBOutlet weak var detailDescriptionLabel: UILabel!
     
@@ -28,6 +29,7 @@ class DetailViewController: UITableViewController {
         }
     }
 
+    
     func configureView() {
         // Update the user interface for the detail item.
         if let detail = self.detailItem {
@@ -56,41 +58,63 @@ class DetailViewController: UITableViewController {
    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    
+
    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
     let Cell1 = tableView.dequeueReusableCellWithIdentifier("Cell1", forIndexPath: indexPath) as? customDetailCell
         Cell1!.textLabel!.font = UIFont(name: "Copperplate-Bold", size: 15)
+
     
         switch(self.title){
         case "Gas"?:
             Cell1!.backgroundColor = color[0]
              Cell1!.customView.backgroundColor = color[0]
+            titleAndLabel = "Gas/"
+            
         case "Oil"?:
             Cell1!.backgroundColor = color[1]
-             Cell1!.customView.backgroundColor = color[1]
+            Cell1!.customView.backgroundColor = color[1]
+            titleAndLabel = "Oil/"
         case "Tires"?:
             Cell1!.backgroundColor = color[2]
-             Cell1!.customView.backgroundColor = color[2]
+            Cell1!.customView.backgroundColor = color[2]
+            titleAndLabel = "Tires/"
         case "Inspection"?:
             Cell1!.backgroundColor = color[3]
-             Cell1!.customView.backgroundColor = color[3]
+            Cell1!.customView.backgroundColor = color[3]
+            titleAndLabel = "Inspection/"
         default:
             print("default")
         break
         }
         Cell1!.customTitle?.text = CarStat[indexPath.section]
-    
-
-      //  Cell1!.customButton?.currentTitle = CarStat[indexPath.section]
+        Cell1!.customViewTextField?.keyboardType = .DecimalPad
+        text = Cell1!.customViewTextField?.text
+        titleAndLabel = titleAndLabel! + "\(CarStat[indexPath.section])"
         return Cell1!
     }
-    
+
     @IBAction func SaveInput(sender: AnyObject) {
+        writeToUserDefaults(titleAndLabel!)
+     
     }
     @IBAction func CancelInput(sender: AnyObject) {
+        text = ""
     }
-  
+    func writeToUserDefaults(titleAndLabel: String){
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(titleAndLabel, forKey: text!)
+        
+    }
+    
+    func getData(name: String) -> String?{
+        let prefs = NSUserDefaults.standardUserDefaults()
+        if let details = prefs.stringForKey(titleAndLabel!){
+            return details as? String
+        }
+        return nil
+    }
+
 }
 
 

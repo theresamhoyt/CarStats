@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 var carStatArray = ["CarStats", "Gas","Oil","Tires","Inspection"]
 var gasArray = ["Gas","Insert Mileage","Insert Price","Insert Gallons"]
 var oilArray = ["Oil", "Insert Mileage", "Insert Price"]
@@ -56,6 +57,8 @@ class CarModel{
     return tempArray
    
     }
+        
+
  
 //    func loadCarStat() {
 //       CarStatsArray.carStatStringArray = carStatArray

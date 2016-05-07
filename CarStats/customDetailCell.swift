@@ -12,7 +12,6 @@ class customDetailCell: UITableViewCell{
     
     @IBOutlet weak var customViewTextField: UITextField!
     @IBOutlet weak var customView: UIView!
-    @IBOutlet weak var customButton: UIButton!
     @IBOutlet weak var customTitle: UILabel!
     @IBOutlet weak var customDetail: UILabel!
 }
