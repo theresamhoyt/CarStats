@@ -77,19 +77,22 @@ class DetailViewController: UITableViewController {
         case "Gas"?:
             Cell1!.backgroundColor = color[0]
             Cell1!.customView.backgroundColor = color[0]
-            fileName = "Gas.rtf"
+            fileName = "Gas.txt"
             
         case "Oil"?:
             Cell1!.backgroundColor = color[1]
             Cell1!.customView.backgroundColor = color[1]
+             fileName = "Oil.txt"
             
         case "Tires"?:
             Cell1!.backgroundColor = color[2]
             Cell1!.customView.backgroundColor = color[2]
+             fileName = "Tires.txt"
             
         case "Inspection"?:
             Cell1!.backgroundColor = color[3]
             Cell1!.customView.backgroundColor = color[3]
+             fileName = "Inspection.txt"
             
         default:
             print("default")
@@ -113,19 +116,12 @@ class DetailViewController: UITableViewController {
         
         let cell = tableView.cellForRowAtIndexPath(indexPath) as? customDetailCell
         
-        print(cell?.customTitle?.text!)
         var input = cell?.customViewTextField?.text!
-        print(input)
+        let title = cell!.customTitle?.text!
         
-        if(fileName.containsString("Gas")){
-            if(cell!.customTitle?.text! == "Insert Mileage"){
-                text = "mileage " + input!
-            }
-            else if(cell!.customTitle?.text! == "Insert Mileage"){
-                text = "price"  + input!
-            }
-            
-        }
+        getStartOfText(title!)
+        
+        text = text + input!
         print(text)
         writeToFile(fileName, text: text)
         cell!.customDetail.text = input
@@ -158,8 +154,55 @@ class DetailViewController: UITableViewController {
         let documentsDirectory = documentsPath[0]
         return documentsDirectory
     }
-    
+
+
+    func getStartOfText(title: String){
+        
+        
+        if(fileName.containsString("GAS")){
+            if(title == "Insert Mileage"){
+                text = "Insert Mileage "
+            }
+            else if(title == "Insert Price"){
+                text = "Insert Price "
+            }
+            else if(title == "Insert Gallons"){
+                text = "Insert Gallons "
+            }
+            
+        }
+        
+        else if(fileName.containsString("OIL")){
+            if(title == "Insert Mileage"){
+                text = "Insert Mileage "
+            }
+            else if(title == "Insert price"){
+                text = "Insert price "
+            }
+            
+        }
+        else if(fileName.containsString("Tires")){
+            if(title == "Insert Mileage @ New Tires"){
+                text = "Insert Mileage @ New Tires "
+            }
+            else if(title == "Insert New Tires Price"){
+                text = "Insert New Tires Price "
+            }
+            else if(title == "Insert Mileage @ Tire Rotation"){
+                text = "Insert Mileage @ Tire Rotation "
+            }
+            
+        }
+        else if(fileName.containsString("Inspection")){
+            if(title == "Insert Mileage"){
+                text = "Insert Mileage "
+            }
+            else if(title == "Date of Inspection"){
+                text = "Insert Date of Inspection "
+            }
+            else if(title == "Insert Total Cost"){
+                text = "Insert Total Cost "
+            }
+        }
+    }
 }
-
-
-
