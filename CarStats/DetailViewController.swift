@@ -58,11 +58,10 @@ class DetailViewController: UITableViewController {
         
     }
     
-    func saveHandler(actionTarget: UIAlertAction){
-        print("YES");//operator ! because it's Optional here
-        
-        //Remove data from NSUserDefaults.
-        
+    //    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
     }
     
     class customView: UIView {
