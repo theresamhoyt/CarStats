@@ -57,36 +57,55 @@ class CarModel{
     return tempArray
    
     }
-        
+    
 
- 
-//    func loadCarStat() {
-//       CarStatsArray.carStatStringArray = carStatArray
-//    }
-//    
-//    func loadGas() {
-//         CarStatsArray.carStatStringArray = gasArray
-//    }
-//    
-//    func loadOil() {
-//        CarStatsArray.carStatStringArray = oilArray
-//    }
-//    
-//    func loadTire() {
-//         CarStatsArray.carStatStringArray = tireArray
-//    }
-//    
-//    func loadInspection() {
-//        stringArray.carStatStringArray = inspectionArray
-//    }
-//    
-//    func getCarStat() -> [String] {
-//
-//        return stringArray.carStatStringArray
-//    }
     
 }
-
+class GasModel{
+    
+    var mileage: String?
+    var price: String?
+    var gallons: String?
+ 
+    let mileageKey = "gasMileage"
+    let priceKey = "gasPrice"
+    let gallonKey =  "gasGallons"
+    
+    class var sharedInstance: GasModel {
+        struct Singleton {
+            static let instance = GasModel()
+        }
+        
+        return Singleton.instance
+    }
+    
+    func getGasData() -> GasModel{
+        
+        let gasModel = GasModel()
+        
+        mileage = getData(mileageKey)
+        gasModel.mileage = mileage
+        
+        price = getData(priceKey)
+        gasModel.price = price
+        
+        gallons = getData(gallonKey)
+        gasModel.gallons = gallons
+        
+       return gasModel
+        
+    }
+    
+    func getData(object: String) -> String?{
+        let prefs = NSUserDefaults.standardUserDefaults()
+        if let  data = prefs.objectForKey(object){
+            return data as? String
+        }
+        return nil
+    }
+    
+    
+}
 /*
 var gas = {
     let title: String = "Gas"

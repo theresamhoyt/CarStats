@@ -16,9 +16,8 @@ extension UITableView {
 }
 class DetailViewController: UITableViewController {
     
-    
     var text: String = ""
-    var fileName: String = ""
+    var key: [String]?
     @IBOutlet weak var detailDescriptionLabel: UILabel!
     
     let color = [UIColor(red: 28/255, green: 173/255, blue: 0/255, alpha: 1.0),
@@ -26,7 +25,8 @@ class DetailViewController: UITableViewController {
                  UIColor(red: 255/255, green: 0/255, blue: 4/255, alpha: 1.0),
                  UIColor(red: 252/255, green: 247/255, blue: 143/255, alpha: 1.0)
     ]
-    
+    var gasModel: GasModel?
+    var object: String?
     var CarStat: [String] = []
     var detailItem: AnyObject? {
         didSet {
@@ -41,15 +41,17 @@ class DetailViewController: UITableViewController {
         if let detail = self.detailItem {
             if let label = self.detailDescriptionLabel {
                 label.text = detail.description
+                
+                
             }
         }
     }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
         
+
     }
     
     
@@ -59,150 +61,86 @@ class DetailViewController: UITableViewController {
         
     }
     
-    
     //    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    
+   
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         
         let Cell1 = tableView.dequeueReusableCellWithIdentifier("Cell1", forIndexPath: indexPath) as? customDetailCell
         Cell1!.textLabel!.font = UIFont(name: "Copperplate-Bold", size: 15)
         
-        
         switch(self.title){
         case "Gas"?:
+            
             Cell1!.backgroundColor = color[0]
             Cell1!.customView.backgroundColor = color[0]
-            fileName = "Gas.txt"
             
         case "Oil"?:
             Cell1!.backgroundColor = color[1]
             Cell1!.customView.backgroundColor = color[1]
-             fileName = "Oil.txt"
             
         case "Tires"?:
             Cell1!.backgroundColor = color[2]
             Cell1!.customView.backgroundColor = color[2]
-             fileName = "Tires.txt"
+ 
             
         case "Inspection"?:
             Cell1!.backgroundColor = color[3]
             Cell1!.customView.backgroundColor = color[3]
-             fileName = "Inspection.txt"
+  
             
         default:
             print("default")
             break
         }
-
+        
+        
         Cell1!.customTitle?.text = CarStat[indexPath.section]
         Cell1!.customViewTextField?.keyboardType = .DecimalPad
-        
-        if(Cell1!.customViewTextField.window != "nil"){
-            
-        }
-        
+
         return Cell1!
     }
-
     @IBAction func SaveInput(sender: AnyObject) {
 
         let value = sender as! UIButton
         let indexPath = self.tableView.indexPathForView(value)!
         
         let cell = tableView.cellForRowAtIndexPath(indexPath) as? customDetailCell
+        cell!.customTitle?.text = CarStat[indexPath.section]
         
+        cell!.customDetail.text = ""
         var input = cell?.customViewTextField?.text!
-        let title = cell!.customTitle?.text!
+
         
-        getStartOfText(title!)
+        let finalStr = text + input!
+        print(finalStr)
         
-        text = text + input!
-        print(text)
-        writeToFile(fileName, text: text)
-        cell!.customDetail.text = input
+        if((cell?.customTitle.text!.containsString((gasModel?.mileageKey)!)) != nil){
+            writeToNSUserDefaults(finalStr, key: (gasModel?.mileageKey)!)
+        }
+        cell!.customDetail.text = input! + ","
         cell!.customViewTextField?.text! = ""
   
         cell!.customView.setNeedsDisplay()
         input = ""
     }
     
-
-    
     @IBAction func CancelInput(sender: AnyObject) {
-        text = ""
+        let value = sender as! UIButton
+        let indexPath = self.tableView.indexPathForView(value)!
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as? customDetailCell
+        cell!.customViewTextField?.text = ""
+        
+        
+    }
+    func writeToNSUserDefaults(input: String, key: String){
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(input, forKey: key)
     }
     
-    func writeToFile(fileName: String, text: String){
-
-        let findFile = getDirectory().stringByAppendingPathComponent(fileName)
-        
-        do {
-            try text.writeToFile(findFile, atomically: true, encoding: NSUTF8StringEncoding)
-        } catch {
-            // failed to write file – bad permissions, bad filename, missing permissions, or more likely it can't be converted to the encoding
-        }
-        
-        
-    }
-    func getDirectory() -> NSString{
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-        let documentsDirectory = documentsPath[0]
-        return documentsDirectory
-    }
-
-
-    func getStartOfText(title: String){
-        
-        
-        if(fileName.containsString("GAS")){
-            if(title == "Insert Mileage"){
-                text = "Insert Mileage "
-            }
-            else if(title == "Insert Price"){
-                text = "Insert Price "
-            }
-            else if(title == "Insert Gallons"){
-                text = "Insert Gallons "
-            }
-            
-        }
-        
-        else if(fileName.containsString("OIL")){
-            if(title == "Insert Mileage"){
-                text = "Insert Mileage "
-            }
-            else if(title == "Insert price"){
-                text = "Insert price "
-            }
-            
-        }
-        else if(fileName.containsString("Tires")){
-            if(title == "Insert Mileage @ New Tires"){
-                text = "Insert Mileage @ New Tires "
-            }
-            else if(title == "Insert New Tires Price"){
-                text = "Insert New Tires Price "
-            }
-            else if(title == "Insert Mileage @ Tire Rotation"){
-                text = "Insert Mileage @ Tire Rotation "
-            }
-            
-        }
-        else if(fileName.containsString("Inspection")){
-            if(title == "Insert Mileage"){
-                text = "Insert Mileage "
-            }
-            else if(title == "Date of Inspection"){
-                text = "Insert Date of Inspection "
-            }
-            else if(title == "Insert Total Cost"){
-                text = "Insert Total Cost "
-            }
-        }
-    }
 }
