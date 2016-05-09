@@ -63,7 +63,8 @@ class MasterViewController: UITableViewController {
        
      let indexPath = self.tableView.indexPathForSelectedRow
         var Location = CellObjects[(indexPath?.section)!]
-     
+
+print(Location[0])
         if let controller = (segue.destinationViewController as? UINavigationController)!.topViewController as? DetailViewController{
             controller.title = Location[0]
 
@@ -71,8 +72,18 @@ class MasterViewController: UITableViewController {
                 
                 switch indetify{
                 case "NextTable":
-                    Location.removeFirst()
+
+                    var model = []
+                    switch Location[0]{
+                        case "Gas": model = GasModel.sharedInstance.getGasData().getGasParameters()
+                        case "Oil": model = OilModel.sharedInstance.getOilData().getOilParameters()
+                        case "Tires": model = TireModel.sharedInstance.getTireData().getTireParameters()
+                        case "Inspection": model = InspectionModel.sharedInstance.getInspectionData().getInspectionParameters()
+                        default: break
+                    }
+                    Location.removeFirst() //remove first string from array object, sends on carStat object parameters
                     controller.CarStat = Location
+                    controller.CategoryModel = model as! [Double]
                     
                 default: break
                 }

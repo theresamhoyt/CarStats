@@ -17,10 +17,10 @@ var inspectionArray = ["Inspection", "Inpection-Mileage:","Inspection-Date:","In
 
 
 class CarModel{
-   
+    
     
     var CarStatsArray: [[String]] = [[]]
-   
+    
     class var sharedInstance: CarModel {
         struct Singleton {
             static let instance = CarModel()
@@ -31,24 +31,36 @@ class CarModel{
     
     func LoadArray() -> [[String]]{
         
-      let tempArray: [[String]] = [gasArray,oilArray,tireArray,inspectionArray]
-    
-    return tempArray
-   
+        let tempArray: [[String]] = [gasArray,oilArray,tireArray,inspectionArray]
+        
+        return tempArray
+        
     }
     
-
+    func getMileage() -> Double{
+        let prefs = NSUserDefaults.standardUserDefaults()
+        return prefs.doubleForKey("mileage")
+    }
     
+    func setMileage(input: Double){
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(input, forKey: "mileage")
+    }
 }
+
+
 class GasModel{
     
-    var mileage: String?
-    var price: String?
-    var gallons: String?
- 
+    var mileage = 0.0
+    var price = 0.0
+    var gallons = 0.0
+    
     let gasMileageKey = "Gas-Mileage"
     let gasPriceKey = "Gas-Price"
     let gasGallonKey =  "Gallons"
+    
+    let carModel = CarModel()
+    var gasArr = [Double]()
     
     class var sharedInstance: GasModel {
         struct Singleton {
@@ -71,16 +83,24 @@ class GasModel{
         gallons = getData(gasGallonKey)
         gasModel.gallons = gallons
         
-       return gasModel
+        return gasModel
         
     }
     
-    func getData(object: String) -> String?{
+    func getGasParameters() -> [Double]{
+        gasArr.append(carModel.getMileage())
+        gasArr.append(price)
+        gasArr.append(gallons)
+        return gasArr
+    }
+    
+    func getData(object: String) -> Double{
         let prefs = NSUserDefaults.standardUserDefaults()
-        if let  data = prefs.objectForKey(object){
-            return data as? String
-        }
-        return nil
+//        if let  data = prefs.objectForKey(object){
+//            return data //as? Double
+//        }
+//        return nil
+        return prefs.doubleForKey(object)
     }
     
     
@@ -88,12 +108,15 @@ class GasModel{
 
 class OilModel{
     
-    var oilMileage: String?
-    var oilPrice: String?
+    var oilMileage = 0.0
+    var oilPrice = 0.0
     
     let oilMileageKey = "Oil-Mileage"
-    var oilPriceKey = "Oil-Price"
-   
+    let oilPriceKey = "Oil-Price"
+    
+    let carModel = CarModel()
+    var oilArr = [Double]()
+    
     
     class var sharedInstance: OilModel {
         struct Singleton {
@@ -112,31 +135,41 @@ class OilModel{
         
         oilPrice = getData(oilPriceKey)
         oilModel.oilPrice = oilPrice
+        oilArr.append(oilPrice)
         
         return oilModel
-        
     }
     
-    func getData(object: String) -> String?{
+    func getOilParameters() -> [Double]{
+        oilArr.append(carModel.getMileage())
+        oilArr.append(oilPrice)
+        return oilArr
+    }
+    
+    func getData(object: String) -> Double{
         let prefs = NSUserDefaults.standardUserDefaults()
-        if let  data = prefs.objectForKey(object){
-            return data as? String
-        }
-        return nil
+//        if let  data = prefs.objectForKey(object){
+//            return data
+//        }
+//        return nil
+        return prefs.doubleForKey(object)
+
     }
-    
-    
 }
+
 
 class TireModel{
     
-    var tireMileage: String?
-    var newTiresPrice: String?
-    var tireRotation : String?
+    var tireMileage = 0.0
+    var newTiresPrice = 0.0
+    var tireRotationMileage = 0.0
     
     let tireMileageKey = "Tires-Mileage"
     var newTiresPriceKey = "Tires-Price:"
-    var tireRotationKey = "Tire-Rotation-Mileage"
+    var tireRotationMileageKey = "Tire-Rotation-Mileage"
+    
+    let carModel = CarModel()
+    var tireArr = [Double]()
     
     class var sharedInstance: TireModel {
         struct Singleton {
@@ -156,32 +189,44 @@ class TireModel{
         newTiresPrice = getData(newTiresPriceKey)
         tireModel.newTiresPrice = newTiresPrice
         
-        tireRotation = getData(newTiresPriceKey)
-        tireModel.tireRotation = tireRotation
+        tireRotationMileage = getData(tireRotationMileageKey)
+        tireModel.tireRotationMileage = tireRotationMileage
         
         return tireModel
         
     }
     
-    func getData(object: String) -> String?{
-        let prefs = NSUserDefaults.standardUserDefaults()
-        if let  data = prefs.objectForKey(object){
-            return data as? String
-        }
-        return nil
+    func getTireParameters() -> [Double]{
+        tireArr.append(carModel.getMileage())
+        tireArr.append(newTiresPrice)
+        tireArr.append(tireRotationMileage)
+        return tireArr
     }
     
-    
+    func getData(object: String) -> Double{
+        let prefs = NSUserDefaults.standardUserDefaults()
+//        if let  data = prefs.objectForKey(object){
+//            return data as? Double
+//        }
+//        return nil
+        print(prefs.doubleForKey(object))
+        return prefs.doubleForKey(object)
+    }
 }
+
+
 class InspectionModel{
     
-    var inspectionMileage: String?
-    var inspsectionDate: String?
-    var inspectionPrice : String?
+    var inspectionMileage = 0.0
+    var inspsectionDate = 0.0
+    var inspectionPrice = 0.0
     
     let inspectionMileageKey = "Inpection-Mileage"
     var inspectionDateKey = "Inspection-Date"
     var inspectionPricekey = "Inspection-Price:"
+    
+    let carModel = CarModel()
+    var inspectionArr = [Double]()
     
     class var sharedInstance: InspectionModel {
         struct Singleton {
@@ -195,27 +240,34 @@ class InspectionModel{
         
         let inspectionModel = InspectionModel()
         
-        inspectionMileage = getData(inspectionMileageKey)
+        inspectionMileage = getData(inspectionMileageKey)!
         inspectionModel.inspectionMileage = inspectionMileage
         
-        inspsectionDate = getData(inspectionDateKey)
+        inspsectionDate = getData(inspectionDateKey)!
         inspectionModel.inspsectionDate = inspsectionDate
         
-        inspectionPrice = getData(inspectionPricekey)
+        inspectionPrice = getData(inspectionPricekey)!
         inspectionModel.inspectionPrice = inspectionPrice
         
         return inspectionModel
         
     }
     
-    func getData(object: String) -> String?{
-        let prefs = NSUserDefaults.standardUserDefaults()
-        if let  data = prefs.objectForKey(object){
-            return data as? String
-        }
-        return nil
+    func getInspectionParameters() -> [Double]{
+        inspectionArr.append(carModel.getMileage())
+        inspectionArr.append(inspsectionDate)
+        inspectionArr.append(inspectionPrice)
+        
+        return inspectionArr
     }
     
-    
+    func getData(object: String) -> Double?{
+        let prefs = NSUserDefaults.standardUserDefaults()
+//        if let data = prefs.stringForKey(object){
+//            return data as? Double
+//        }
+//        return nil
+        return prefs.doubleForKey(object)
+    }
 }
 
