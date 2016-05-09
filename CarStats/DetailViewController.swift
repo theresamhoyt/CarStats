@@ -25,6 +25,10 @@ class DetailViewController: UITableViewController {
                  UIColor(red: 252/255, green: 247/255, blue: 143/255, alpha: 1.0)
     ]
     var CarStat: [String] = []
+    var CategoryModel: [Double] = []
+    
+    
+    
     var detailItem: AnyObject? {
         didSet {
             // Update the view.
@@ -47,6 +51,8 @@ class DetailViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
+
+print(CategoryModel)
         
 
     }
@@ -60,10 +66,28 @@ class DetailViewController: UITableViewController {
     
     //    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
     
+//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 1
+//    }
+//    
+//    class customView: UIView {
+//        let viewLabel: UILabel?
+//        override init(frame: CGRect) {
+//            super.init(frame:frame)
+//            
+//            viewLabel = UILabel(frame: CGRect(x: 20, y:20, width: 100, height: 250))
+//            addSubview(viewLabel!)
+//        }
+//        required init?(coder aDecoder: NSCoder){
+//            super.init(coder: aDecoder)
+//        }
+//    }
+    
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-   
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         
@@ -72,6 +96,9 @@ class DetailViewController: UITableViewController {
         
         switch(self.title){
         case "Gas"?:
+//            let gasModel = GasModel.sharedInstance.getGasData()
+//            let mileage = gasModel.mileage
+//            print(mileage)
             Cell1!.backgroundColor = color[0]
             Cell1!.customView.backgroundColor = color[0]
             
@@ -82,12 +109,10 @@ class DetailViewController: UITableViewController {
         case "Tires"?:
             Cell1!.backgroundColor = color[2]
             Cell1!.customView.backgroundColor = color[2]
- 
             
         case "Inspection"?:
             Cell1!.backgroundColor = color[3]
             Cell1!.customView.backgroundColor = color[3]
-  
             
         default:
             print("default")
@@ -96,6 +121,19 @@ class DetailViewController: UITableViewController {
         
         
         Cell1!.customTitle?.text = CarStat[indexPath.section]
+        
+        
+        //this is adding curent values to the detail item in the cell =========
+        if (CategoryModel.count > 1){
+            if (indexPath == 0){
+                Cell1!.customDetail.text = String(CategoryModel[indexPath.section])
+            }
+            Cell1!.customDetail.text = String(CategoryModel[indexPath.section])
+        } else {
+            Cell1!.customDetail.text = String(0.0)
+        }
+        //=====================================================================
+        
         Cell1!.customViewTextField?.keyboardType = .DecimalPad
 
         return Cell1!
@@ -109,16 +147,16 @@ class DetailViewController: UITableViewController {
         cell!.customTitle?.text = CarStat[indexPath.section]
         
         cell!.customDetail.text = ""
-        var input = cell?.customViewTextField?.text!
+        var input = ((cell?.customViewTextField?.text!)! as NSString).doubleValue
         let title = cell!.customTitle?.text
         
-        writerHelper(title!, input: input!)
+        writerHelper(title!, input: input)
        
-        cell!.customDetail.text = input! + ","
+        cell!.customDetail.text = String(input)
         cell!.customViewTextField?.text! = ""
   
         cell!.customView.setNeedsDisplay()
-        input = ""
+//        input = ""
     }
     
     @IBAction func CancelInput(sender: AnyObject) {
@@ -132,7 +170,8 @@ class DetailViewController: UITableViewController {
     }
   
 
-    func writerHelper(title: String, input: String){
+    func writerHelper(title: String, input: Double){
+        let carModel = CarModel()
         switch(self.title){
         
         case "Gas"?:
@@ -140,6 +179,8 @@ class DetailViewController: UITableViewController {
            
            if ifStr1ContainsStr2(title, str2: gasModel.gasMileageKey){
                 writeToNSUserDefaults(input, key: gasModel.gasMileageKey)
+                carModel.setMileage(input)
+            
            }
            if ifStr1ContainsStr2(title, str2: gasModel.gasPriceKey){
                 writeToNSUserDefaults(input, key: gasModel.gasPriceKey)
@@ -154,6 +195,7 @@ class DetailViewController: UITableViewController {
             
             if ifStr1ContainsStr2(title, str2: oilModel.oilMileageKey){
                 writeToNSUserDefaults(input, key: oilModel.oilMileageKey)
+                carModel.setMileage(input)
             }
             else if ifStr1ContainsStr2(title, str2: oilModel.oilPriceKey){
                 writeToNSUserDefaults(input, key: oilModel.oilPriceKey)
@@ -169,9 +211,11 @@ class DetailViewController: UITableViewController {
             }
             if ifStr1ContainsStr2(title, str2: tireModel.tireMileageKey){
                 writeToNSUserDefaults(input, key: tireModel.tireMileageKey)
+                carModel.setMileage(input)
             }
-            if ifStr1ContainsStr2(title, str2: tireModel.tireRotationKey){
-                writeToNSUserDefaults(input, key: tireModel.tireRotationKey)
+            if ifStr1ContainsStr2(title, str2: tireModel.tireRotationMileageKey){
+                writeToNSUserDefaults(input, key: tireModel.tireRotationMileageKey)
+                carModel.setMileage(input)
             }
             
             
@@ -181,6 +225,7 @@ class DetailViewController: UITableViewController {
             
             if ifStr1ContainsStr2(title, str2: inspectionModel.inspectionMileageKey ){
                 writeToNSUserDefaults(input, key: inspectionModel.inspectionMileageKey)
+                carModel.setMileage(input)
             }
             if ifStr1ContainsStr2(title, str2: inspectionModel.inspectionDateKey){
                 writeToNSUserDefaults(input, key: inspectionModel.inspectionDateKey)
@@ -204,7 +249,7 @@ class DetailViewController: UITableViewController {
         return false
     }
     
-    func writeToNSUserDefaults(input: String, key: String){
+    func writeToNSUserDefaults(input: Double, key: String){
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(input, forKey: key)
     }
