@@ -8,34 +8,14 @@
 
 import Foundation
 
+
 var carStatArray = ["CarStats", "Gas","Oil","Tires","Inspection"]
-var gasArray = ["Gas","Insert Mileage","Insert Price","Insert Gallons"]
-var oilArray = ["Oil", "Insert Mileage", "Insert Price"]
-var tireArray = ["Tires", "Insert Mileage @ New Tires","Insert New Tires Price", "Insert Mileage @ Tire Rotation "]
-var inspectionArray = ["Inspection", "Insert Mileage","Date of Inspection","Insert Total Cost"]
+var gasArray = ["Gas","Gas-Mileage:","Gas-Price:","Gallons"]
+var oilArray = ["Oil", "Oil-Mileage:", "Oil-Price"]
+var tireArray = ["Tires", "New Tires-Mileage:","New Tires-Price:", "Tire-Rotation-Mileage: "]
+var inspectionArray = ["Inspection", "Inpection-Mileage:","Inspection-Date:","Inspection-Price:"]
 
 
-//class CarStats: NSObject{
-//    
-//    var carStatStringArray: [String] = []
-//    
-//    func getTitle() -> String{
-//        return carStatStringArray[0]
-//    }
-//    func getOne() -> String{
-//        return carStatStringArray[1]
-//    }
-//    func getTwo() -> String{
-//        return carStatStringArray[2]
-//    }
-//    func getThree() -> String{
-//        return carStatStringArray[3]
-//    }
-//    func getFour() -> String{
-//        return carStatStringArray[4]
-//    }
-//}
-//
 class CarModel{
    
     
@@ -56,67 +36,186 @@ class CarModel{
     return tempArray
    
     }
+    
+
+    
+}
+class GasModel{
+    
+    var mileage: String?
+    var price: String?
+    var gallons: String?
  
-//    func loadCarStat() {
-//       CarStatsArray.carStatStringArray = carStatArray
-//    }
-//    
-//    func loadGas() {
-//         CarStatsArray.carStatStringArray = gasArray
-//    }
-//    
-//    func loadOil() {
-//        CarStatsArray.carStatStringArray = oilArray
-//    }
-//    
-//    func loadTire() {
-//         CarStatsArray.carStatStringArray = tireArray
-//    }
-//    
-//    func loadInspection() {
-//        stringArray.carStatStringArray = inspectionArray
-//    }
-//    
-//    func getCarStat() -> [String] {
-//
-//        return stringArray.carStatStringArray
-//    }
+    let gasMileageKey = "Gas-Mileage"
+    let gasPriceKey = "Gas-Price"
+    let gasGallonKey =  "Gallons"
     
-}
-
-/*
-var gas = {
-    let title: String = "Gas"
-    let mileage: String = "Mielage"
-    let price: String = "Price"
-    let gallons: String = "Gallons"
-    let milesPerGallon = ""
+    class var sharedInstance: GasModel {
+        struct Singleton {
+            static let instance = GasModel()
+        }
+        
+        return Singleton.instance
+    }
     
-}
-
-
-var oil = {
-    let mileage: String = "Mileage"
-    let price: String = "Price"
+    func getGasData() -> GasModel{
+        
+        let gasModel = GasModel()
+        
+        mileage = getData(gasMileageKey)
+        gasModel.mileage = mileage
+        
+        price = getData(gasPriceKey)
+        gasModel.price = price
+        
+        gallons = getData(gasGallonKey)
+        gasModel.gallons = gallons
+        
+       return gasModel
+        
+    }
     
-}
-var tireInfo = {
-    let mileageOfCurrTires: String = "Mileage of Tires"
-    let price: String = "Price"
-    let rotation: String = "Tire Rotation Mileage"
+    func getData(object: String) -> String?{
+        let prefs = NSUserDefaults.standardUserDefaults()
+        if let  data = prefs.objectForKey(object){
+            return data as? String
+        }
+        return nil
+    }
     
     
 }
 
-
-var inspect = {
+class OilModel{
     
-    let mileage: String = "Mileage"
-    let date: String = "Date of Inspection"
-    let price: String = "Cost of Inspection"
+    var oilMileage: String?
+    var oilPrice: String?
+    
+    let oilMileageKey = "Oil-Mileage"
+    var oilPriceKey = "Oil-Price"
+   
+    
+    class var sharedInstance: OilModel {
+        struct Singleton {
+            static let instance = OilModel()
+        }
+        
+        return Singleton.instance
+    }
+    
+    func getOilData() -> OilModel{
+        
+        let oilModel = OilModel()
+        
+        oilMileage = getData(oilMileageKey)
+        oilModel.oilMileage = oilMileage
+        
+        oilPrice = getData(oilPriceKey)
+        oilModel.oilPrice = oilPrice
+        
+        return oilModel
+        
+    }
+    
+    func getData(object: String) -> String?{
+        let prefs = NSUserDefaults.standardUserDefaults()
+        if let  data = prefs.objectForKey(object){
+            return data as? String
+        }
+        return nil
+    }
     
     
 }
-*/
 
+class TireModel{
+    
+    var tireMileage: String?
+    var newTiresPrice: String?
+    var tireRotation : String?
+    
+    let tireMileageKey = "Tires-Mileage"
+    var newTiresPriceKey = "Tires-Price:"
+    var tireRotationKey = "Tire-Rotation-Mileage"
+    
+    class var sharedInstance: TireModel {
+        struct Singleton {
+            static let instance = TireModel()
+        }
+        
+        return Singleton.instance
+    }
+    
+    func getTireData() -> TireModel{
+        
+        let tireModel = TireModel()
+        
+        tireMileage = getData(tireMileageKey)
+        tireModel.tireMileage = tireMileage
+        
+        newTiresPrice = getData(newTiresPriceKey)
+        tireModel.newTiresPrice = newTiresPrice
+        
+        tireRotation = getData(newTiresPriceKey)
+        tireModel.tireRotation = tireRotation
+        
+        return tireModel
+        
+    }
+    
+    func getData(object: String) -> String?{
+        let prefs = NSUserDefaults.standardUserDefaults()
+        if let  data = prefs.objectForKey(object){
+            return data as? String
+        }
+        return nil
+    }
+    
+    
+}
+class InspectionModel{
+    
+    var inspectionMileage: String?
+    var inspsectionDate: String?
+    var inspectionPrice : String?
+    
+    let inspectionMileageKey = "Inpection-Mileage"
+    var inspectionDateKey = "Inspection-Date"
+    var inspectionPricekey = "Inspection-Price:"
+    
+    class var sharedInstance: InspectionModel {
+        struct Singleton {
+            static let instance = InspectionModel()
+        }
+        
+        return Singleton.instance
+    }
+    
+    func getInspectionData() -> InspectionModel{
+        
+        let inspectionModel = InspectionModel()
+        
+        inspectionMileage = getData(inspectionMileageKey)
+        inspectionModel.inspectionMileage = inspectionMileage
+        
+        inspsectionDate = getData(inspectionDateKey)
+        inspectionModel.inspsectionDate = inspsectionDate
+        
+        inspectionPrice = getData(inspectionPricekey)
+        inspectionModel.inspectionPrice = inspectionPrice
+        
+        return inspectionModel
+        
+    }
+    
+    func getData(object: String) -> String?{
+        let prefs = NSUserDefaults.standardUserDefaults()
+        if let  data = prefs.objectForKey(object){
+            return data as? String
+        }
+        return nil
+    }
+    
+    
+}
 

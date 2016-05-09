@@ -16,7 +16,6 @@ class MasterViewController: UITableViewController {
                  UIColor(red: 252/255, green: 247/255, blue: 143/255, alpha: 1.0)
     ]
     
-    
     var alertTitle: String?
     var detailViewController: DetailViewController? = nil
     var CellObjects: [[String]] = [[]]
@@ -25,6 +24,7 @@ class MasterViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         CellObjects = CarModel.sharedInstance.LoadArray()
+        
         self.tableView.reloadData()
       
         //self.navigationItem.leftBarButtonItem = self.editButtonItem()
@@ -66,19 +66,7 @@ class MasterViewController: UITableViewController {
      
         if let controller = (segue.destinationViewController as? UINavigationController)!.topViewController as? DetailViewController{
             controller.title = Location[0]
-//            switch indexPath?.section {
-//            case 0?:
-//                controller.self.tableView.backgroundColor = color[0]
-//            case 1?:
-//                controller.self.tableView.backgroundColor = color[1]
-//            case 2?:
-//                controller.self.tableView.backgroundColor = color[2]
-//            case 3?:
-//                controller.self.tableView.backgroundColor = color[3]
-//            default: break
-//            }
-            
-            
+
             if let indetify = segue.identifier{
                 
                 switch indetify{
@@ -88,9 +76,11 @@ class MasterViewController: UITableViewController {
                     
                 default: break
                 }
-                
+        
             }
+        
         }
+ 
     }
 //        if segue.identifier == "showDetail" {
 //            if let indexPath = self.tableView.indexPathForSelectedRow {
@@ -150,6 +140,7 @@ class MasterViewController: UITableViewController {
             cell.imageView?.image = imageResize(UIImage(named: "gasMain.png")!, sizeChange: size)
             cell.backgroundColor = color[0]//gasColor
         
+            
         }else if title == "Oil"{
             cell.imageView?.image = imageResize(UIImage(named: "oilMain.png")!, sizeChange: size)
             cell.backgroundColor = color[1]//oilColor

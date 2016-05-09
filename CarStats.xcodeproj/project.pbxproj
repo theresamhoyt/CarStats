@@ -60,13 +60,13 @@
 		F6787E4E1CD3A82000F3E275 /* CarStats */ = {
 			isa = PBXGroup;
 			children = (
+				F620CC7C1CDD377300A93C50 /* customDetailCell.swift */,
 				F6787E651CD3A94800F3E275 /* CarModel.swift */,
 				F6787E4F1CD3A82000F3E275 /* AppDelegate.swift */,
 				F6787E511CD3A82000F3E275 /* MasterViewController.swift */,
 				F6787E531CD3A82000F3E275 /* DetailViewController.swift */,
 				F6787E551CD3A82000F3E275 /* Main.storyboard */,
 				F6787E581CD3A82000F3E275 /* Assets.xcassets */,
-				F620CC7C1CDD377300A93C50 /* customDetailCell.swift */,
 				F6787E5A1CD3A82000F3E275 /* LaunchScreen.storyboard */,
 				F6787E5D1CD3A82000F3E275 /* Info.plist */,
 			);
