@@ -177,9 +177,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="uAw-fN-YH3"/>
-                    <connections>
-                        <outlet property="DetailtableView" destination="zAj-gT-nw8" id="iIB-UE-LOs"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2ig-In-Kk1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
