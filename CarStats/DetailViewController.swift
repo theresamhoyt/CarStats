@@ -51,9 +51,8 @@ class DetailViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
-
-print(CategoryModel)
         
+        self.view.backgroundColor = UIColor(red: 206/255, green: 206/255, blue: 206/255, alpha: 1)
 
     }
     
@@ -101,6 +100,7 @@ print(CategoryModel)
 //            print(mileage)
             Cell1!.backgroundColor = color[0]
             Cell1!.customView.backgroundColor = color[0]
+
             
         case "Oil"?:
             Cell1!.backgroundColor = color[1]
@@ -147,7 +147,7 @@ print(CategoryModel)
         cell!.customTitle?.text = CarStat[indexPath.section]
         
         cell!.customDetail.text = ""
-        var input = ((cell?.customViewTextField?.text!)! as NSString).doubleValue
+        let input = ((cell?.customViewTextField?.text!)! as NSString).doubleValue
         let title = cell!.customTitle?.text
         
         writerHelper(title!, input: input)
