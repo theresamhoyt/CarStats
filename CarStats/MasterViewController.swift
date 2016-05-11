@@ -26,6 +26,7 @@ class MasterViewController: UITableViewController {
         CellObjects = CarModel.sharedInstance.LoadArray()
         
         self.tableView.reloadData()
+        self.view.backgroundColor = UIColor(red: 206/255, green: 206/255, blue: 206/255, alpha: 1)
       
         //self.navigationItem.leftBarButtonItem = self.editButtonItem()
 
