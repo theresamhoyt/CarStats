@@ -10,6 +10,7 @@ import UIKit
 
 class customDetailCell: UITableViewCell{
     
+    var masterviewCell: UITableViewCell!
     @IBOutlet weak var customViewTextField: UITextField!
     @IBOutlet weak var customView: UIView!
     @IBOutlet weak var customTitle: UILabel!
