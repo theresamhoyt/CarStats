@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CarStats/DetailViewController.swift"
-            timestampString = "484692477.297947"
+            filePath = "CarStats/MasterViewController.swift"
+            timestampString = "484860343.017531"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "getOilAlertData(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

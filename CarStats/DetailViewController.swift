@@ -14,11 +14,16 @@ extension UITableView {
         return indexPathForRowAtPoint(location)
     }
 }
-class DetailViewController: UITableViewController {
-    
 
+
+
+class DetailViewController: UITableViewController{
+    
+    
     @IBOutlet weak var detailDescriptionLabel: UILabel!
     
+
+
     let color = [UIColor(red: 28/255, green: 173/255, blue: 0/255, alpha: 1.0),
                  UIColor(red: 239/255, green: 183/255, blue: 0/255, alpha: 1.0),
                  UIColor(red: 255/255, green: 0/255, blue: 4/255, alpha: 1.0),
@@ -27,8 +32,7 @@ class DetailViewController: UITableViewController {
     var CarStat: [String] = []
     var CategoryModel: [Double] = []
     
-    
-    
+    var isAlert = false
     var detailItem: AnyObject? {
         didSet {
             // Update the view.
@@ -47,6 +51,7 @@ class DetailViewController: UITableViewController {
             }
         }
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -56,31 +61,12 @@ class DetailViewController: UITableViewController {
 
     }
     
-    
+
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
         return CarStat.count
         
     }
-    
-    //    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-    
-//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 1
-//    }
-//    
-//    class customView: UIView {
-//        let viewLabel: UILabel?
-//        override init(frame: CGRect) {
-//            super.init(frame:frame)
-//            
-//            viewLabel = UILabel(frame: CGRect(x: 20, y:20, width: 100, height: 250))
-//            addSubview(viewLabel!)
-//        }
-//        required init?(coder aDecoder: NSCoder){
-//            super.init(coder: aDecoder)
-//        }
-//    }
     
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -95,9 +81,6 @@ class DetailViewController: UITableViewController {
         
         switch(self.title){
         case "Gas"?:
-//            let gasModel = GasModel.sharedInstance.getGasData()
-//            let mileage = gasModel.mileage
-//            print(mileage)
             Cell1!.backgroundColor = color[0]
             Cell1!.customView.backgroundColor = color[0]
 
@@ -139,24 +122,30 @@ class DetailViewController: UITableViewController {
         return Cell1!
     }
     @IBAction func SaveInput(sender: AnyObject) {
-
+        
         let value = sender as! UIButton
         let indexPath = self.tableView.indexPathForView(value)!
         
         let cell = tableView.cellForRowAtIndexPath(indexPath) as? customDetailCell
         cell!.customTitle?.text = CarStat[indexPath.section]
-        
+         let detail = cell!.customDetail?.text
+     
         cell!.customDetail.text = ""
         let input = ((cell?.customViewTextField?.text!)! as NSString).doubleValue
         let title = cell!.customTitle?.text
+       
         
+        let value2 = input
+        let value1 = Double (detail!)
+        if(checkValues(title!, value1: value1!, value2: value2)){
+            isAlert = true
+        }
         writerHelper(title!, input: input)
        
         cell!.customDetail.text = String(input)
         cell!.customViewTextField?.text! = ""
   
         cell!.customView.setNeedsDisplay()
-//        input = ""
     }
     
     @IBAction func CancelInput(sender: AnyObject) {
@@ -168,7 +157,103 @@ class DetailViewController: UITableViewController {
         
         
     }
-  
+    func checkValues(title: String, value1: Double?, value2: Double?) -> Bool{
+        
+        if(value1 == nil || value2 == nil){
+            return false
+        }
+        var hasAlert = false
+        
+        switch(self.title){
+            
+        case "Gas"?:
+            let gasModel = GasModel.sharedInstance.getGasData()
+            
+            if ifStr1ContainsStr2(title, str2: gasModel.gasMileageKey){
+                let finalValue = value2! - value1!
+                
+                if (value2 == 10000 || finalValue <= 10000){
+                    hasAlert = true
+                }
+                
+            }
+            if ifStr1ContainsStr2(title, str2: gasModel.gasPriceKey){
+                
+                if(value1 < value2){
+                    hasAlert = true
+                }
+            }
+            if ifStr1ContainsStr2(title, str2: gasModel.gasGallonKey){
+                if(value1 < value2){
+                    hasAlert = true
+                }
+            }
+            
+        case "Oil"?:
+            
+            let oilModel = OilModel.sharedInstance.getOilData()
+            
+            if ifStr1ContainsStr2(title, str2: oilModel.oilMileageKey){
+                let finalValue = value1! - value2!
+                
+                if (value2 == 5000 || finalValue <= 5000){
+                    hasAlert = true
+                }
+    
+            }
+            else if ifStr1ContainsStr2(title, str2: oilModel.oilPriceKey){
+      
+            }
+            
+            
+        case "Tires"?:
+            
+            let tireModel = TireModel.sharedInstance.getTireData()
+            
+            if ifStr1ContainsStr2(title, str2: tireModel.newTiresPriceKey ){
+          
+            }
+            if ifStr1ContainsStr2(title, str2: tireModel.tireMileageKey){
+                let finalValue = value2! - value1!
+                
+                if (finalValue == 0 || finalValue <= 10000){
+                    hasAlert = true
+                }
+   
+            }
+            if ifStr1ContainsStr2(title, str2: tireModel.tireRotationMileageKey){
+       
+            }
+            
+        /*Need to change this one to be a date */
+        case "Inspection"?:
+            
+            let inspectionModel = InspectionModel.sharedInstance.getInspectionData()
+            
+            if ifStr1ContainsStr2(title, str2: inspectionModel.inspectionMileageKey ){
+                let finalValue = value2! - value1!
+                
+                if (finalValue == 0 || finalValue == 10000){
+                    hasAlert = true
+                }
+         
+            }
+            if ifStr1ContainsStr2(title, str2: inspectionModel.inspectionDateKey){
+
+            }
+            if ifStr1ContainsStr2(title, str2: inspectionModel.inspectionPricekey){
+            }
+            
+            
+        default:
+            print("default")
+            break
+        }
+        
+        
+        
+        return hasAlert
+    }
 
     func writerHelper(title: String, input: Double){
         let carModel = CarModel()
@@ -188,6 +273,9 @@ class DetailViewController: UITableViewController {
            if ifStr1ContainsStr2(title, str2: gasModel.gasGallonKey){
                 writeToNSUserDefaults(input, key: gasModel.gasGallonKey)
            }
+           if(isAlert){
+                writeBoolsToNSUserDefaults(isAlert, key: gasModel.gasAlertKey)
+            }
             
         case "Oil"?:
            
@@ -197,8 +285,11 @@ class DetailViewController: UITableViewController {
                 writeToNSUserDefaults(input, key: oilModel.oilMileageKey)
                 carModel.setMileage(input)
             }
-            else if ifStr1ContainsStr2(title, str2: oilModel.oilPriceKey){
+            if ifStr1ContainsStr2(title, str2: oilModel.oilPriceKey){
                 writeToNSUserDefaults(input, key: oilModel.oilPriceKey)
+            }
+            if(isAlert){
+                writeBoolsToNSUserDefaults(isAlert, key: oilModel.oilAlertKey)
             }
         
             
@@ -217,6 +308,9 @@ class DetailViewController: UITableViewController {
                 writeToNSUserDefaults(input, key: tireModel.tireRotationMileageKey)
                 carModel.setMileage(input)
             }
+            if(isAlert){
+                writeBoolsToNSUserDefaults(isAlert, key: tireModel.tireAlertKey)
+            }
             
             
         case "Inspection"?:
@@ -233,7 +327,9 @@ class DetailViewController: UITableViewController {
             if ifStr1ContainsStr2(title, str2: inspectionModel.inspectionPricekey){
                 writeToNSUserDefaults(input, key: inspectionModel.inspectionPricekey)
             }
-            
+            if(isAlert){
+                writeBoolsToNSUserDefaults(isAlert, key: inspectionModel.inspectionAlertKey)
+            }
             
         default:
             print("default")
@@ -250,6 +346,10 @@ class DetailViewController: UITableViewController {
     }
     
     func writeToNSUserDefaults(input: Double, key: String){
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setObject(input, forKey: key)
+    }
+    func writeBoolsToNSUserDefaults(input: Bool, key: String){
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(input, forKey: key)
     }
