@@ -116,9 +116,11 @@ class OilModel{
     
     var oilMileage = 0.0
     var oilPrice = 0.0
+    var oilAlert = false
     
     let oilMileageKey = "Oil-Mileage"
     let oilPriceKey = "Oil-Price"
+    let oilAlertKey = "OilAlertKey"
     
     let carModel = CarModel()
     var oilArr = [Double]()
@@ -142,6 +144,9 @@ class OilModel{
         oilPrice = getData(oilPriceKey)
         oilModel.oilPrice = oilPrice
         oilArr.append(oilPrice)
+        oilAlert = getShowAlertData(oilAlertKey)
+        oilModel.oilAlert = oilAlert
+        
         
         return oilModel
     }
@@ -157,6 +162,11 @@ class OilModel{
         return prefs.doubleForKey(object)
 
     }
+    func getShowAlertData(object: String) -> Bool{
+        let boolPrefs = NSUserDefaults.standardUserDefaults()
+        
+        return boolPrefs.boolForKey(object)
+    }
 }
 
 
@@ -165,10 +175,12 @@ class TireModel{
     var tireMileage = 0.0
     var newTiresPrice = 0.0
     var tireRotationMileage = 0.0
+    var tireAlert = false
     
     let tireMileageKey = "Tires-Mileage"
     var newTiresPriceKey = "Tires-Price:"
     var tireRotationMileageKey = "Tire-Rotation-Mileage"
+    var tireAlertKey = "tireAlertKey"
     
     let carModel = CarModel()
     var tireArr = [Double]()
@@ -194,6 +206,9 @@ class TireModel{
         tireRotationMileage = getData(tireRotationMileageKey)
         tireModel.tireRotationMileage = tireRotationMileage
         
+        tireAlert = getShowAlertData(tireAlertKey)
+        tireModel.tireAlert = tireAlert
+        
         return tireModel
         
     }
@@ -209,6 +224,11 @@ class TireModel{
         let prefs = NSUserDefaults.standardUserDefaults()
         print(prefs.doubleForKey(object))
         return prefs.doubleForKey(object)
+    }
+    func getShowAlertData(object: String) -> Bool{
+        let boolPrefs = NSUserDefaults.standardUserDefaults()
+        
+        return boolPrefs.boolForKey(object)
     }
 }
 

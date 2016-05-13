@@ -172,7 +172,7 @@ class DetailViewController: UITableViewController{
             if ifStr1ContainsStr2(title, str2: gasModel.gasMileageKey){
                 let finalValue = value2! - value1!
                 
-                if (finalValue == 0 || finalValue == 10000){
+                if (value2 == 10000 || finalValue <= 10000){
                     hasAlert = true
                 }
                 
@@ -194,9 +194,9 @@ class DetailViewController: UITableViewController{
             let oilModel = OilModel.sharedInstance.getOilData()
             
             if ifStr1ContainsStr2(title, str2: oilModel.oilMileageKey){
-                let finalValue = value2! - value1!
+                let finalValue = value1! - value2!
                 
-                if (finalValue == 0 || finalValue == 10000){
+                if (value2 == 5000 || finalValue <= 5000){
                     hasAlert = true
                 }
     
@@ -216,7 +216,7 @@ class DetailViewController: UITableViewController{
             if ifStr1ContainsStr2(title, str2: tireModel.tireMileageKey){
                 let finalValue = value2! - value1!
                 
-                if (finalValue == 0 || finalValue == 10000){
+                if (finalValue == 0 || finalValue <= 10000){
                     hasAlert = true
                 }
    
@@ -225,7 +225,7 @@ class DetailViewController: UITableViewController{
        
             }
             
-            
+        /*Need to change this one to be a date */
         case "Inspection"?:
             
             let inspectionModel = InspectionModel.sharedInstance.getInspectionData()
@@ -285,8 +285,11 @@ class DetailViewController: UITableViewController{
                 writeToNSUserDefaults(input, key: oilModel.oilMileageKey)
                 carModel.setMileage(input)
             }
-            else if ifStr1ContainsStr2(title, str2: oilModel.oilPriceKey){
+            if ifStr1ContainsStr2(title, str2: oilModel.oilPriceKey){
                 writeToNSUserDefaults(input, key: oilModel.oilPriceKey)
+            }
+            if(isAlert){
+                writeBoolsToNSUserDefaults(isAlert, key: oilModel.oilAlertKey)
             }
         
             
@@ -304,6 +307,9 @@ class DetailViewController: UITableViewController{
             if ifStr1ContainsStr2(title, str2: tireModel.tireRotationMileageKey){
                 writeToNSUserDefaults(input, key: tireModel.tireRotationMileageKey)
                 carModel.setMileage(input)
+            }
+            if(isAlert){
+                writeBoolsToNSUserDefaults(isAlert, key: tireModel.tireAlertKey)
             }
             
             
