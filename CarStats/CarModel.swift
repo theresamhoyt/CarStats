@@ -54,11 +54,12 @@ class GasModel{
     var mileage = 0.0
     var price = 0.0
     var gallons = 0.0
+    var alert = false
     
     let gasMileageKey = "Gas-Mileage"
     let gasPriceKey = "Gas-Price"
     let gasGallonKey =  "Gallons"
-    
+    let gasAlertKey = "gasAlert"
     let carModel = CarModel()
     var gasArr = [Double]()
     
@@ -83,6 +84,9 @@ class GasModel{
         gallons = getData(gasGallonKey)
         gasModel.gallons = gallons
         
+        alert = getShowAlertData(gasAlertKey)
+        gasModel.alert = alert
+        
         return gasModel
         
     }
@@ -96,11 +100,13 @@ class GasModel{
     
     func getData(object: String) -> Double{
         let prefs = NSUserDefaults.standardUserDefaults()
-//        if let  data = prefs.objectForKey(object){
-//            return data //as? Double
-//        }
-//        return nil
         return prefs.doubleForKey(object)
+    }
+    func getShowAlertData(object: String) -> Bool{
+        let boolPrefs = NSUserDefaults.standardUserDefaults()
+        
+        return boolPrefs.boolForKey(object)
+        
     }
     
     
@@ -110,9 +116,11 @@ class OilModel{
     
     var oilMileage = 0.0
     var oilPrice = 0.0
+    var oilAlert = false
     
     let oilMileageKey = "Oil-Mileage"
     let oilPriceKey = "Oil-Price"
+    let oilAlertKey = "OilAlertKey"
     
     let carModel = CarModel()
     var oilArr = [Double]()
@@ -136,6 +144,9 @@ class OilModel{
         oilPrice = getData(oilPriceKey)
         oilModel.oilPrice = oilPrice
         oilArr.append(oilPrice)
+        oilAlert = getShowAlertData(oilAlertKey)
+        oilModel.oilAlert = oilAlert
+        
         
         return oilModel
     }
@@ -148,12 +159,13 @@ class OilModel{
     
     func getData(object: String) -> Double{
         let prefs = NSUserDefaults.standardUserDefaults()
-//        if let  data = prefs.objectForKey(object){
-//            return data
-//        }
-//        return nil
         return prefs.doubleForKey(object)
 
+    }
+    func getShowAlertData(object: String) -> Bool{
+        let boolPrefs = NSUserDefaults.standardUserDefaults()
+        
+        return boolPrefs.boolForKey(object)
     }
 }
 
@@ -163,10 +175,12 @@ class TireModel{
     var tireMileage = 0.0
     var newTiresPrice = 0.0
     var tireRotationMileage = 0.0
+    var tireAlert = false
     
     let tireMileageKey = "Tires-Mileage"
     var newTiresPriceKey = "Tires-Price:"
     var tireRotationMileageKey = "Tire-Rotation-Mileage"
+    var tireAlertKey = "tireAlertKey"
     
     let carModel = CarModel()
     var tireArr = [Double]()
@@ -192,6 +206,9 @@ class TireModel{
         tireRotationMileage = getData(tireRotationMileageKey)
         tireModel.tireRotationMileage = tireRotationMileage
         
+        tireAlert = getShowAlertData(tireAlertKey)
+        tireModel.tireAlert = tireAlert
+        
         return tireModel
         
     }
@@ -205,12 +222,13 @@ class TireModel{
     
     func getData(object: String) -> Double{
         let prefs = NSUserDefaults.standardUserDefaults()
-//        if let  data = prefs.objectForKey(object){
-//            return data as? Double
-//        }
-//        return nil
         print(prefs.doubleForKey(object))
         return prefs.doubleForKey(object)
+    }
+    func getShowAlertData(object: String) -> Bool{
+        let boolPrefs = NSUserDefaults.standardUserDefaults()
+        
+        return boolPrefs.boolForKey(object)
     }
 }
 
@@ -221,9 +239,11 @@ class InspectionModel{
     var inspsectionDate = 0.0
     var inspectionPrice = 0.0
     
+    var inspectionAlert = false
     let inspectionMileageKey = "Inpection-Mileage"
     var inspectionDateKey = "Inspection-Date"
     var inspectionPricekey = "Inspection-Price:"
+    var inspectionAlertKey = "InspectionAlert"
     
     let carModel = CarModel()
     var inspectionArr = [Double]()
@@ -249,8 +269,10 @@ class InspectionModel{
         inspectionPrice = getData(inspectionPricekey)!
         inspectionModel.inspectionPrice = inspectionPrice
         
-        return inspectionModel
+        inspectionAlert = getShowAlertData(inspectionAlertKey)
+        inspectionModel.inspectionAlert = inspectionAlert
         
+       return inspectionModel
     }
     
     func getInspectionParameters() -> [Double]{
@@ -263,11 +285,14 @@ class InspectionModel{
     
     func getData(object: String) -> Double?{
         let prefs = NSUserDefaults.standardUserDefaults()
-//        if let data = prefs.stringForKey(object){
-//            return data as? Double
-//        }
-//        return nil
+
         return prefs.doubleForKey(object)
+    }
+    func getShowAlertData(object: String) -> Bool{
+    let boolPrefs = NSUserDefaults.standardUserDefaults()
+    
+        return boolPrefs.boolForKey(object)
+    
     }
 }
 
